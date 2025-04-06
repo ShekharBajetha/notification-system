@@ -1,0 +1,6 @@
+com\example\notification_system\model\NotificationEvent.class
+com\example\notification_system\NotificationSystemApplication.class
+com\example\notification_system\controller\NotificationController.class
+com\example\notification_system\kafka\NotificationProducer.class
+com\example\notification_system\config\KafkaProducerConfig.class
+com\example\notification_system\service\KafkaProducerService.class

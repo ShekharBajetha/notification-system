@@ -1,0 +1,32 @@
+
+---
+
+### ✅ `.gitignore`
+
+```gitignore
+# Java and Gradle
+/build
+/.gradle
+/out
+*.class
+
+# IntelliJ
+*.iml
+.idea/
+*.ipr
+*.iws
+
+# OS generated
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Docker
+*.pid
+.env
+
+# Others
+*.jar
+*.war

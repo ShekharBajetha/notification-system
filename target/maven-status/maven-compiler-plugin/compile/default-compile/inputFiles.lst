@@ -1,0 +1,6 @@
+D:\IntelliJ\notification-system\src\main\java\com\example\notification_system\config\KafkaProducerConfig.java
+D:\IntelliJ\notification-system\src\main\java\com\example\notification_system\controller\NotificationController.java
+D:\IntelliJ\notification-system\src\main\java\com\example\notification_system\kafka\NotificationProducer.java
+D:\IntelliJ\notification-system\src\main\java\com\example\notification_system\model\NotificationEvent.java
+D:\IntelliJ\notification-system\src\main\java\com\example\notification_system\NotificationSystemApplication.java
+D:\IntelliJ\notification-system\src\main\java\com\example\notification_system\service\KafkaProducerService.java
