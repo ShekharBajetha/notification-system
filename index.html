@@ -31,6 +31,18 @@
         document.getElementById('messages').prepend(div);
       });
     });
+
+    const userId = "123"; // example userId
+// Fetch past notifications
+fetch(`http://localhost:8080/notifications/${userId}`)
+  .then(response => response.json())
+  .then(data => {
+    data.forEach(notification => {
+      showNotification(notification.message);
+    });
+  })
+  .catch(error => console.error("Error fetching past notifications:", error));
+
 </script>
 
 </body>

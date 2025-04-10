@@ -1,29 +1,40 @@
 package com.example.notification_system.kafka;
-
-import com.example.notification_system.model.NotificationEvent;
-import com.example.notification_system.websocket.NotificationWebSocketService;
+import com.example.notification_system.model.Notification;
+import com.example.notification_system.repository.NotificationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
-import static org.apache.kafka.common.requests.DeleteAclsResponse.log;
+import java.time.LocalDateTime;
 
 @Service
 public class NotificationConsumer {
 
     @Autowired
-    private NotificationWebSocketService webSocketService;
+    private SimpMessagingTemplate messagingTemplate;
+
+    @Autowired
+    private NotificationRepository notificationRepository;
 
     @KafkaListener(topics = "notification-topic", groupId = "notification-group")
-    public void consume(NotificationEvent event) {
-        System.out.println("✅ Notification received for user ID: " + event.getUserId() +
-                " | Message: " + event.getMessage());
-        // Future enhancement: trigger WebSocket/push/DB save/etc.
-    }
+    public void consume(String message) {
 
-    @KafkaListener(topics = "notification-topic", groupId = "notification-group")
-    public void listen(NotificationEvent event) {
-        log.info("✅ Consumed notification for user: {}", event.getUserId());
-        webSocketService.sendNotification(event);
+        String[] parts = message.split("\\|");
+        if (parts.length < 2) return;
+
+        String userId = parts[0];
+        String content = parts[1];
+
+        // Save to DB
+        Notification notification = new Notification();
+        notification.setUserId(userId);
+        notification.setMessage(content);
+        notification.setTimestamp(LocalDateTime.now());
+
+        notificationRepository.save(notification);
+
+        // Push to WebSocket
+        messagingTemplate.convertAndSend("/topic/notifications/" + userId, content);
     }
 }
