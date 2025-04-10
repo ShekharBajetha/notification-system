@@ -83,11 +83,17 @@ You'll receive real-time messages if the `userId` matches.
 ```
 
 ---
+✅ Recent Updates:
+Added persistent storage of notifications in a relational database.
+
+Each notification now includes a message field and is saved upon creation.
+
+Notifications are still delivered in real-time via WebSockets.
+
 
 
 ## 🧼 Future Improvements
 
-- Add persistence (PostgreSQL)
 - User notification preferences
 - Retry/Dead-letter topics for failed messages
 - Frontend notification UI
